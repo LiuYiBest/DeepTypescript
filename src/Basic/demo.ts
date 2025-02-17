@@ -34,6 +34,8 @@ let tom1: Person1 = {
     name: 'tom'  //只定义name属性，age属性可以不定义
 }
 
+
+
 // 任意属性
 interface Person2 {
     name: string;
@@ -57,6 +59,20 @@ let tom3: Person3 = {
 }
 // 只读属性不能修改 会报错
 // tom.id = 9527;
+
+// 可索引签名
+interface Person5{
+    name:string;
+    [nonX:string]:any;
+    // [nony:symbol]:any;通常写字符串索引签名，因为js对象的键只能是字符串
+}
+let tom5:Person5 = {
+    name:'tom',
+    age:123, 
+    demo:'demo'
+
+}
+
 
 //  用来限制数组中的元素类型
 let firArray:number[] = [1,2,3];
