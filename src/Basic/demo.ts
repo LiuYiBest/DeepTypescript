@@ -105,7 +105,15 @@ let func3 = (a:number,b:number,...c:number[]):number=>{
     return a + b + c.reduce((pre,cur)=>pre+cur,0);
 }
 func3(1,2,3,4,5,6,7,8,9,10);   // a和b的值为1和2，c的值为3,4,5,6,7,8,9,10 输出的值为55
- 
+
+type TypeScriptFun = {name:string,age:number};
+// 函数解构 只传入一个参数，参数是一个对象，对象中有name和age属性
+function fun1({name,age}:TypeScriptFun){
+    console.log(name,age);
+    return name + age;
+}
+fun1({name:'tom',age:123}); // 输出tom 123
+
 // 类型断言  不要使用 as any ，因为这样会失去类型检查
 interface Cat {
     nameA: string;
@@ -166,6 +174,8 @@ let tuple: [string, number] = ['tuple', 123];
 tuple[0] = 'tuple';
 tuple[1] = 123;
 // tuple = ['tuple', 123,1,'xxx']; // 报错，元组中只能有两个元素，不能有三个或更多
+// 可变元祖解构
+let [name1,age1,...rest]:[string,number,...any[]] = ['tom',1,'rest1',123,'rest2',true];
 
 // 枚举类型 用来取值被限定在一定范围内的场景，比如性别、方向、状态等
 // 数字枚举成员会被赋值为从 0 开始加1递增的数字
@@ -212,6 +222,24 @@ class AnimalClass {
         this.name = name;
     }
 }
+
+// 定义一个人的类
+class People   {
+    name:string;
+    age:number;
+    static num:number = 0;
+    constructor(name: string,age:number) {
+        this.name = name;
+        this.age = age;
+        People.num++;
+    }
+    eat():void{
+        console.log('people eat');
+    }
+}
+let people1 = new People('你的名字',18);
+people1.eat(); // 输出people eat
+console.log(People.num); // 输出1
 
 // 继承
 class Cat extends AnimalClass {
