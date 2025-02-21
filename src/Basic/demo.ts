@@ -88,6 +88,18 @@ let func = (a:number,b:number):number=>{
     return a + b;
 }
 
+// 泛型接口可
+interface Ref<A> {
+    value: A;
+}
+let ref1: Ref<number> = { value: 123 };
+let ref2: Ref<string> = { value: '123' };
+type RefType = {name:string,age:number};
+let ref3: Ref<RefType> = {
+     value: {name:'tom',age:123} 
+};
+
+
 // 函数的可选参数，可选参数必须放在必选参数的后面
 let func1 = (a:number,b?:number):number=>{
     // 如果b没有传，则返回a
@@ -113,6 +125,21 @@ function fun1({name,age}:TypeScriptFun){
     return name + age;
 }
 fun1({name:'tom',age:123}); // 输出tom 123
+
+// 函数重载
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number | string {
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''))*10;
+    } else if (typeof x === 'string') {
+        return x.split('').reverse().join('');
+    }
+    return x;
+}
+reverse(123); // 输出3210
+reverse('hello'); // 输出olleh
+
 
 // 类型断言  不要使用 as any ，因为这样会失去类型检查
 interface Cat {
@@ -338,3 +365,32 @@ function logArray(value: any) {
 
 logArray(["apple", "banana"]);  // 输出: String array: apple, banana
 logArray([1, 2, 3]);            // 输出: Not a string array: [1, 2, 3]
+
+
+// 通用交叉类型 
+type o1 = { a: number ; b: string };
+type o2 = { c: bigint ; d: boolean };
+type o3 = o1 & o2; // { a: number; b: string; c: bigint; d: boolean; }
+let o4:o3 = {a:1,b:'1',c:123n,d:true};
+
+function extendCross<T, U>(first: T, second: U): T & U {
+    let result = <T & U>{};
+    return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
