@@ -132,6 +132,8 @@ function isFish(animal: Cat | Fish) {
     return false;
 }
 
+
+
 // 声明文件
 // 当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能
 // declare var jQuery: (selector: string) => any;
@@ -320,5 +322,19 @@ loggingIdentity2({length:10}); // 输出10
 
 
 
+// 类型守卫就是一些表达式，它们会在运行时检查以确保在某个作用域里的类型
+// 自定义类型守卫，检查数组类型，一个值是否是字符串数组：
+function isStringArray(value: any): value is string[] {
+    return Array.isArray(value) && value.every(item => typeof item === "string"); 
+}
 
+function logArray(value: any) {
+    if (isStringArray(value)) {
+        console.log("String array:", value.join(", "));  // value 被缩小为 string[]
+    } else {
+        console.log("Not a string array:", value);
+    }
+}
 
+logArray(["apple", "banana"]);  // 输出: String array: apple, banana
+logArray([1, 2, 3]);            // 输出: Not a string array: [1, 2, 3]
