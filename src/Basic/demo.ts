@@ -378,17 +378,15 @@ function extendCross<T, U>(first: T, second: U): T & U {
     return result;
 }
 
+// infer 关键字用来声明一个类型变量
+type FirstElement<T> = T extends [infer U, ...any[]] ? U : never;
+type MyTuple = [string, number, boolean];
+type FirstType = FirstElement<MyTuple>; // string
 
-
-
-
-
-
-
-
-
-
-
+// 使用 infer 来提取对象中某个属性的类型：
+type PropertyType<T, K extends keyof T> = T extends { [key in K]: infer U } ? U : never;
+type MyObject = { name: string; age: number };
+type NameType = PropertyType<MyObject, "name">; // string
 
 
 
