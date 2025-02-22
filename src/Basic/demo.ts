@@ -391,4 +391,13 @@ type NameType = PropertyType<MyObject, "name">; // string
 
 
 
+// 声明函数 使用 declare 时，只声明类型信息，不提供实现。
+declare function nameDeclare(params: string): void;
+// 声明变量
+declare const nameDeclare1: string;
+// // 声明模块
+// declare module 'nameDeclare2' {
+//     export const nameDeclare2: string;
+// }
+
 
