@@ -29,9 +29,11 @@ class CustomerService {
  * @param methodName 
  * @param methodDescriptor 
  */
-function MyMethod(targetClassPrototype:any,methodName:string,methodDescriptor:PropertyDescriptor){
-  console.log(methodDescriptor.value); // 打印出方法中的内容  
-  return  methodDescriptor
+function MyMethod(methodParam:any){ 
+    return function (targetClassPrototype:any,methodName:string,methodDescriptor:PropertyDescriptor){
+        console.log("方法装饰器",targetClassPrototype,methodName,methodDescriptor);
+        console.log("方法装饰器的参数",methodParam);
+    }
 }
 
 // 角色服务类
@@ -40,7 +42,7 @@ class RoleService {
   constructor(){
 
   }
-  @MyMethod
+  @MyMethod("param")
   DistributeRole(){
     console.log("分配角色");
   }
